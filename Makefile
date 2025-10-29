@@ -36,6 +36,8 @@ clean:
 	$(RM) $(OBJ)
 	@make clean -C $(LIBFT_DIR)
 
+mlx: $(MLX_LIB)
+
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(MLX_DIR)

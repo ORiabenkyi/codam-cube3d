@@ -1,24 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.c                                           :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:57:00 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 15:30:43 by oriabenk         ###   ########.fr       */
+/*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
+/*   Updated: 2025/10/29 12:10:02 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
-
-int	main(int count, char *arg[])
-{
-	t_game		game;
-
-	(void)count;
-	(void)arg;
-	if (init_game(&game, count, arg) != 0)
-		return (1);
-	return (0);
-}
