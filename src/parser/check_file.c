@@ -6,7 +6,13 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 12:10:02 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:44:53 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cube3d.h"
+
+int	check_file(int a)
+{
+	return (0);
+}

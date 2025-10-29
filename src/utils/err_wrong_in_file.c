@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   err_wrong_in_file.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 16:14:55 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:24:32 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	init_game(t_game *game, int count, char **arg)
+int	err_wrong_in_file(void)
 {
-	if (is_valid_input(count, arg) != 0)
-		return (1);
-	return (0);
+	ft_printf("Error! Wrong information in file.\n");
+	return (1);
 }

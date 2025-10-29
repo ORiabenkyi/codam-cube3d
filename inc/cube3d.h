@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 15:31:18 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/10/29 17:34:16 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,21 @@ typedef struct s_game
 {
 	char				**file;
 	char				**map;
+	struct s_texture	*wall;
+
 }						t_game;
 
-
 int	init_game(t_game *game, int counter, char **argument);
+int	is_valid_input(int count, char **arg);
+
+int	engine(t_game *game);
+
+/*
+error managment
+*/
+
+int	err_wrong_command(void);
+int	err_wrong_file(void);
+int	err_wrong_in_file(void);
 
 #endif

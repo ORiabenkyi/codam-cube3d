@@ -6,11 +6,12 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:20:06 by oriabenk          #+#    #+#             */
-/*   Updated: 2024/10/11 11:57:44 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:40:30 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
+
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

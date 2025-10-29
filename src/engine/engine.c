@@ -6,7 +6,13 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:08 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 12:10:09 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:42:14 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "cube3d.h"
+
+int	engine(t_game *game)
+{
+	return (0);
+}
