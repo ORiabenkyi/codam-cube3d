@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:36 by oriabenk         ###   ########.fr       */
+/*   Created: 2024/10/11 13:59:56 by oriabenk          #+#    #+#             */
+/*   Updated: 2024/10/11 14:12:07 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "../inc/libft.h"
 
-# include "MLX42/MLX42.h"
-# include "libft/inc/libft.h"
-
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}

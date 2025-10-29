@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Oleksandr <o.riabenkyi@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:36 by oriabenk         ###   ########.fr       */
+/*   Created: 2024/10/07 13:20:06 by oriabenk          #+#    #+#             */
+/*   Updated: 2024/10/09 22:50:28 by Oleksandr        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "../inc/libft.h"
 
-# include "MLX42/MLX42.h"
-# include "libft/inc/libft.h"
-
+int	ft_tolower(int symbol)
+{
+	if (symbol >= 'A' && symbol <= 'Z')
+		symbol += 32;
+	return (symbol);
+}

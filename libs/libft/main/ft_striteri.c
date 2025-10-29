@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:36 by oriabenk         ###   ########.fr       */
+/*   Created: 2024/10/07 13:20:06 by oriabenk          #+#    #+#             */
+/*   Updated: 2024/10/10 16:49:36 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "../inc/libft.h"
 
-# include "MLX42/MLX42.h"
-# include "libft/inc/libft.h"
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	size_t	counter;
+	size_t	length;
 
+	if (!s || !(*s) || !f)
+		return ;
+	length = ft_strlen(s);
+	counter = 0;
+	while (counter < length)
+	{
+		(*f)(counter, &s[counter]);
+		counter++;
+	}
+}

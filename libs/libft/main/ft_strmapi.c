@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:36 by oriabenk         ###   ########.fr       */
+/*   Created: 2024/10/07 13:20:06 by oriabenk          #+#    #+#             */
+/*   Updated: 2024/10/10 15:11:56 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "../inc/libft.h"
 
-# include "MLX42/MLX42.h"
-# include "libft/inc/libft.h"
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	size_t	counter;
+	size_t	length;
+	char	*str;
 
+	length = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (length + 1));
+	if (str == 0)
+		return (str);
+	counter = 0;
+	while (counter < length)
+	{
+		str[counter] = (*f)(counter, s[counter]);
+		counter++;
+	}
+	str[counter] = 0;
+	return (str);
+}

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   ft_lenstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:36 by oriabenk         ###   ########.fr       */
+/*   Created: 2024/10/07 13:20:06 by oriabenk          #+#    #+#             */
+/*   Updated: 2025/05/11 11:05:11 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "libs.h"
 
-# include "MLX42/MLX42.h"
-# include "libft/inc/libft.h"
+size_t	ft_lenstr(const char *str)
+{
+	size_t	counter;
 
+	counter = 0;
+	if (str != NULL)
+		while (str[counter] != '\0')
+			counter++;
+	return (counter);
+}

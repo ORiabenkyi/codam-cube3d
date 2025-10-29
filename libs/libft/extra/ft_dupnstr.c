@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   ft_dupnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 11:56:36 by oriabenk         ###   ########.fr       */
+/*   Created: 2024/10/07 13:20:06 by oriabenk          #+#    #+#             */
+/*   Updated: 2025/05/11 12:31:31 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "libs.h"
 
-# include "MLX42/MLX42.h"
-# include "libft/inc/libft.h"
+char	*ft_dupnstr(const char *str, size_t strlen)
+{
+	char	*tmp;
 
+	tmp = (char *)malloc(strlen + 1);
+	if (tmp == NULL)
+		return (NULL);
+	ft_memcopy(tmp, str, strlen);
+	tmp[strlen] = '\0';
+	return (tmp);
+}
