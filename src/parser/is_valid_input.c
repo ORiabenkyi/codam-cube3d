@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 17:50:50 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/14 18:14:13 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	is_valid_input(t_game *game, int count, char **arg)
 		return (err_wrong_alocate());
 	if (feel_texture(game) != 0)
 		return (err_wrong_texture(game));
-	
 	if (is_valid_in_file(arg[1]) != 0)
 		return (err_wrong_in_file());
 	return (0);
@@ -48,7 +47,6 @@ int	is_valid_file(char *file)
 	close(fd);
 	return (0);
 }
-
 
 int	is_valid_in_file(char *file)
 {
