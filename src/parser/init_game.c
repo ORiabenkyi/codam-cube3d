@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../../inc/cube3d.h"
 
 int	init_game(t_game *game, int count, char **arg)
 {
-	if (is_valid_input(count, arg) != 0)
+	if (is_valid_input(game, count, arg) != 0)
 		return (1);
 	return (0);
 }

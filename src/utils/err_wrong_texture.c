@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_wrong_command.c                                :+:      :+:    :+:   */
+/*   err_wrong_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/10/29 16:13:51 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/10/29 16:17:58 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
 
-int	err_wrong_command(void)
+void	free_texture(t_texture *texture)
 {
-	ft_printf("Error! Command must be like: cub3d file\n");
+	if (texture->north)
+		free(texture->north);
+	if (texture->south)
+		free(texture->south);
+	if (texture->west)
+		free(texture->west);
+	if (texture->east)
+		free(texture->east);
+}
+
+int	err_wrong_texture(t_game *game)
+{
+	free(game->file);
+	free(game->map);
+	free_texture(game->wall);
+	free(game->wall);
+	free(game);
+	ft_printf("Error! Can`t create texture.\n");
 	return (1);
 }

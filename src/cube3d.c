@@ -10,14 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../inc/cube3d.h"
 
 int	main(int count, char *arg[])
 {
 	t_game		game;
 
-	(void)count;
-	(void)arg;
 	if (init_game(&game, count, arg) != 0)
 		return (1);
 	return (0);

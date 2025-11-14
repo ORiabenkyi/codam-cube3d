@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "../../inc/cube3d.h"
 
 int	engine(t_game *game)
 {
+	(void)game;
 	return (0);
 }

@@ -20,7 +20,7 @@
 # include <string.h>
 # include <unistd.h>
 
-# include "./libs/MLX42/include/MLX42/MLX42.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
 # include "../libs/libft/inc/libft.h"
 
 typedef struct s_texture
@@ -29,22 +29,30 @@ typedef struct s_texture
 	char				*south;
 	char				*west;
 	char				*east;
-	mlx_texture_t		*mnorth;
-	mlx_texture_t		*msouth;
-	mlx_texture_t		*meast;
-	mlx_texture_t		*mwest;
 }						t_texture;
+
+typedef struct s_color
+{
+	unsigned char		red;
+	unsigned char		green;
+	unsigned char		blue;
+}					t_color;
 
 typedef struct s_game
 {
-	char				**file;
+	char				*file;
 	char				**map;
 	struct s_texture	*wall;
-
+	struct s_color		*floor;
+	struct s_color		*ceiling;
+	mlx_t				*mlx;
+	mlx_image_t			*img;
 }						t_game;
 
 int	init_game(t_game *game, int counter, char **argument);
-int	is_valid_input(int count, char **arg);
+int	is_valid_input(t_game *game, int count, char **arg);
+int	feel_texture(t_game *game);
+int	feel_game(t_game *game, char *file);
 
 int	engine(t_game *game);
 
@@ -55,5 +63,7 @@ error managment
 int	err_wrong_command(void);
 int	err_wrong_file(void);
 int	err_wrong_in_file(void);
+int	err_wrong_alocate(void);
+int	err_wrong_texture(t_game *game);
 
 #endif

@@ -50,7 +50,7 @@ CFILES = 	main/ft_atoi.c \
 			main/ft_toupper.c  \
 			printf/ft_printf.c \
 			printf/ft_print.c \
-			get_next_line/get_next_line.c \
+			getNextLine/get_next_line.c \
 
 			
 CBONUS =	list/ft_lstnew_bonus.c \

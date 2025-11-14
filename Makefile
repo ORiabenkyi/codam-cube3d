@@ -11,6 +11,21 @@ CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
+CFILES = 	src/cube3d.c \
+			src/parser/init_game.c \
+			src/parser/is_valid_input.c \
+			src/utils/err_wrong_command.c \
+			src/utils/err_wrong_file.c \
+			src/utils/err_wrong_in_file.c \
+			src/utils/err_wrong_alocate.c \
+			src/parser/is_valid_file.c \
+			src/parser/is_valid_in_file.c \
+			src/parser/feel_game.c \
+			src/parser/feel_texture.c \
+			src/engine/engine.c \
+
+OFILES = $(CFILES:.c=.o)
+
 all: $(LIBFT_LIB) $(MLX_LIB) $(NAME) 
 
 # -----------------------
@@ -29,11 +44,11 @@ $(LIBFT_LIB):
 # -----------------------
 # Create main part of the project
 # -----------------------
-$(NAME): $(OBJ) $(MLX_LIB)
-	$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBS) -o $(NAME)
+$(NAME): $(OFILES)
+	$(CC) $(CFLAGS) $(OFILES) $(INC) $(LIBFT_LIB) -o $(NAME)
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OFILES)
 	@make clean -C $(LIBFT_DIR)
 
 mlx: $(MLX_LIB)
