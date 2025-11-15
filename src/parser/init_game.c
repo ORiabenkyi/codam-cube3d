@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/14 18:14:18 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/15 14:14:51 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ int	init_game(t_game *game, int count, char **arg)
 {
 	if (is_valid_input(game, count, arg) != 0)
 		return (1);
+	prints(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/15 12:14:46 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:47:40 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	size_file(char *line)
 {
-	int	i;
-	int fd;
+	int		i;
+	int		fd;
 	char	*str;
 
 	fd = open(line, O_RDONLY);
@@ -25,22 +25,21 @@ static int	size_file(char *line)
 	str = get_next_line(fd);
 	while (str)
 	{
+		if (ft_strlen(str) > 1)
+			i++;
 		free(str);
-		i++;
 		str = get_next_line(fd);
 	}
 	close(fd);
 	return (i);
 }
+
 static int	read_to_memory(t_game *game)
 {
-	int	fd;
-	int i;
+	int		fd;
+	int		i;
 	char	*line;
 
-	game->size_file = size_file(game->file);
-	if (game->size_file < 0)
-		return (perror("Error\nFile open error"), 1);
 	fd = open(game->file, O_RDONLY);
 	if (fd < 0)
 		return (perror("Error\nFile open error"), 1);
@@ -53,31 +52,41 @@ static int	read_to_memory(t_game *game)
 		line = get_next_line(fd);
 		if (!line)
 			return (perror("Error\nFile read error"), 1);
-		game->data[i] = line;
-		i++;
+		if (ft_strlen(line) <= 1)
+		{
+			free(line);
+			continue ;
+		}
+		game->data[i++] = line;
 	}
 	game->data[i] = NULL;
-	close(fd);		
-	return (0);
+	return (close(fd));
 }
 
 int	feel_game(t_game *game, char *file)
 {
+	t_game	*o_game;
 
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (1);
-	ft_memset(game, 0, sizeof(t_game));
-	game->file = ft_strdup(file);
-	if (!game->file)
-		return (free(game), 1);
-	game->map = malloc(sizeof(char *) * 1);
-	if (!game->map)
-		return (free(game->file), free(game), 1);
-	game->data = malloc(sizeof(char *) * 1);
-	if (!game->data)
-		return (free(game->map), free(game->file), free(game), 1);
-	if (read_to_memory(game))
-		return (1);
+	o_game = malloc(sizeof(t_game));
+	if (!o_game)
+		return (err_wrong_alocate());
+	ft_memset(o_game, 0, sizeof(t_game));
+	o_game->file = ft_strdup(file);
+	if (!o_game->file)
+		return (free(o_game), err_wrong_alocate());
+	o_game->map = malloc(sizeof(char *) * 1);
+	if (!o_game->map)
+		return (free(o_game->file), free(o_game), err_wrong_alocate());
+	o_game->data = malloc(sizeof(char *) * 1);
+	if (!o_game->data)
+		return (free(o_game->map), free(o_game->file),
+			free(o_game), err_wrong_alocate());
+	o_game->size_file = size_file(o_game->file);
+	if (o_game->size_file < 7)
+		return (free(o_game->map), free(o_game->file), free(o_game),
+			err_wrong_in_file());
+	if (read_to_memory(o_game) < 0)
+		return (err_wrong_alocate());
+	*game = *o_game;
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   err_wrong_alocate.c                                :+:      :+:    :+:   */
+/*   prints.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/14 18:14:29 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:13:38 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 
 int	prints(t_game *game)
 {
-	int i;
+	int	i;
 
+	ft_printf("Debug mode 3 %d\n", game->size_file);
 	i = 0;
-	while (i < game->size_file)
+	ft_printf("Try print file with %d string\n", game->size_file);
+	while (i < game->size_file && game->data[i])
 	{
-		ft_printf("%s", game->data[i]);
+		ft_printf("%d\t!%d\t-%s", i, ft_strlen(game->data[i]), game->data[i]);
 		i++;
 	}
+	ft_printf("\nKlaar!\n");
 	return (0);
 }
 
 int	printm(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (game->map[i])
-	{	
+	{
 		ft_printf("%s", game->map[i]);
 		i++;
 	}
