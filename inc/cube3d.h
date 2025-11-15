@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/14 18:28:52 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/15 12:12:04 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_color
 typedef struct s_game
 {
 	char				*file;
+	char				**data;
 	int					size_file;
 	char				**map;
 	struct s_texture	*wall;
