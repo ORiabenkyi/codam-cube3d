@@ -68,4 +68,11 @@ int	err_wrong_in_file(void);
 int	err_wrong_alocate(void);
 int	err_wrong_texture(t_game *game);
 
+/*
+support functions
+*/
+
+int	prints(t_game *game);
+int	printm(t_game *game);
+
 #endif

@@ -12,8 +12,8 @@
 
 #include "../../inc/cube3d.h"
 
-int	is_valid_file(char *file);
-int	is_valid_in_file(char *file);
+static int	is_valid_file(char *file);
+static int	is_valid_in_file(char *file);
 
 int	is_valid_input(t_game *game, int count, char **arg)
 {
@@ -30,7 +30,7 @@ int	is_valid_input(t_game *game, int count, char **arg)
 	return (0);
 }
 
-int	is_valid_file(char *file)
+static int	is_valid_file(char *file)
 {
 	int			fd;
 	const char	*extension;
@@ -48,7 +48,7 @@ int	is_valid_file(char *file)
 	return (0);
 }
 
-int	is_valid_in_file(char *file)
+static int	is_valid_in_file(char *file)
 {
 	int			fd;
 	const char	*extension;

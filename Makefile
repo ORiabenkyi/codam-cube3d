@@ -18,8 +18,8 @@ CFILES = 	src/cube3d.c \
 			src/utils/err_wrong_file.c \
 			src/utils/err_wrong_in_file.c \
 			src/utils/err_wrong_alocate.c \
-			src/parser/is_valid_file.c \
-			src/parser/is_valid_in_file.c \
+			src/utils/err_wrong_texture.c \
+			src/utils/prints.c \
 			src/parser/feel_game.c \
 			src/parser/feel_texture.c \
 			src/engine/engine.c \
