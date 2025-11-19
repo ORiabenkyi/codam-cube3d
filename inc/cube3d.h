@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 16:21:04 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:46:04 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ support funcions
 
 int	is_valid_file(char *file);
 int	clean_array(char **array, int endig);
+int	is_whitespace(int symbol);
 
 /*
 step bu step
@@ -70,6 +71,7 @@ int	feel_game(t_game *game, char *file);
 int	feel_texture(t_game *game);
 int	feel_color(t_game *game);
 int	feel_map(t_game *game);
+int	count_map(t_game *game);
 
 int	engine(t_game *game);
 
@@ -84,6 +86,7 @@ int	err_wrong_alocate(void);
 int	err_wrong_texture(t_game *game);
 int	err_wrong_color(t_game *game);
 int	err_wrong_map(t_game *game);
+int	err_wrong_on_map(t_game *game);
 
 /*
 support functions

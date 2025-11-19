@@ -6,11 +6,22 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:09:57 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 15:10:47 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:46:13 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
+
+int	is_whitespace(int symbol)
+{
+	if (symbol == ' ' || symbol == '\t' || symbol == '\v')
+		return (1);
+	else if (symbol == '\n' || symbol == '\r' || symbol == '\f')
+	{
+		return (1);
+	}
+	return (0);
+}
 
 int	clean_array(char **array, int endig)
 {

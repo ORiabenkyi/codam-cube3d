@@ -22,11 +22,13 @@ CFILES = 	src/cube3d.c \
 			src/utils/err_wrong_texture.c \
 			src/utils/err_wrong_color.c \
 			src/utils/err_wrong_map.c \
+			src/utils/err_wrong_on_map.c \
 			src/utils/prints.c \
 			src/parser/feel_game.c \
 			src/parser/feel_texture.c \
 			src/parser/feel_color.c \
 			src/parser/feel_map.c \
+			src/parser/count_map.c \
 			src/engine/engine.c \
 
 OFILES = $(CFILES:.c=.o)

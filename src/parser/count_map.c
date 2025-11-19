@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_input.c                                   :+:      :+:    :+:   */
+/*   count_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 17:46:35 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:45:29 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
 
-int	is_valid_input(t_game *game, int count, char **arg)
+int	count_map(t_game *game)
 {
-	if (count != 2)
-		return (err_wrong_command());
-	if (is_valid_file(arg[1]) != 0)
-		return (err_wrong_file());
-	if (feel_game(game, arg[1]) != 0)
-		return (1);
-	if (feel_texture(game) != 0)
-		return (err_wrong_texture(game));
-	if (feel_color(game) != 0)
-		return (err_wrong_color(game));
-	if (feel_map(game) != 0)
-		return (err_wrong_map(game));
-	if (count_map(game) != 0)
-		return (err_wrong_on_map(game));
+	int	counter;
+
+	counter = -1;
+	while (++counter < game->size_map)
+	{
+		(void)game->map[counter];
+	}
 	return (0);
 }

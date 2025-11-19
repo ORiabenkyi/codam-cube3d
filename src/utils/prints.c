@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 16:20:16 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:23:53 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	printd(t_game *game)
 	return (0);
 }
 
-
 int	printt(t_game *game)
 {
 	int	i;
@@ -72,7 +71,7 @@ int	printt(t_game *game)
 
 int	printc(t_game *game)
 {
-	// ft_printf("Debug mode %d\n", 3);
+	ft_printf("Debug mode %d\n", 3);
 	if (game->floor)
 		ft_printf("%s %d, %d, %d \n", "FLOOR", game->floor->red,
 			game->floor->green, game->floor->blue);

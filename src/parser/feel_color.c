@@ -6,11 +6,25 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 15:10:14 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:43:47 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
+
+static	int	is_only_number(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (ft_isdigit(str[i]) || is_whitespace(str[i]))
+			continue ;
+		return (0);
+	}
+	return (1);
+}
 
 static int	add_color(t_color *color, char *str)
 {
@@ -21,7 +35,7 @@ static int	add_color(t_color *color, char *str)
 	trims = ft_split(str, ',');
 	if (!trims)
 		return (1);
-	if (trims[0])
+	if (trims[0] && is_only_number(trims[0]))
 		i = ft_atoi(trims[0]);
 	if (i > 255 || i < 0)
 		return (clean_array(trims, 1));

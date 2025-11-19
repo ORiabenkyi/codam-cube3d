@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_valid_input.c                                   :+:      :+:    :+:   */
+/*   err_wrong_on_map.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 17:46:35 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:46:26 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
 
-int	is_valid_input(t_game *game, int count, char **arg)
+int	err_wrong_on_map(t_game *game)
 {
-	if (count != 2)
-		return (err_wrong_command());
-	if (is_valid_file(arg[1]) != 0)
-		return (err_wrong_file());
-	if (feel_game(game, arg[1]) != 0)
-		return (1);
-	if (feel_texture(game) != 0)
-		return (err_wrong_texture(game));
-	if (feel_color(game) != 0)
-		return (err_wrong_color(game));
-	if (feel_map(game) != 0)
-		return (err_wrong_map(game));
-	if (count_map(game) != 0)
-		return (err_wrong_on_map(game));
-	return (0);
+	free(game->file);
+	free(game->map);
+	free(game->wall);
+	ft_printf("Error! Can`t create map.\n");
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 16:23:30 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 18:13:19 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,26 @@
 
 static	char	*add_textur(char *str, char *ptr)
 {
+	int		i;
+	char	*ret_str;
+
 	if (str)
 	{
 		free(str);
 		return (NULL);
 	}
-	return (ft_strdup(ptr));
+	ret_str = ft_strdup(ptr);
+	i = 0;
+	while (ret_str[i] && ret_str[i] != '\n')
+		i++;
+	ret_str[i] = '\0';
+	return (ret_str);
 }
 
 static	int	add_textur1(t_texture *muur, char *str)
 {
 	char	*ptr;
+	int		fd;
 
 	ptr = str + 2;
 	while (*ptr && *ptr == ' ')
@@ -41,12 +50,18 @@ static	int	add_textur1(t_texture *muur, char *str)
 		if (!muur->south)
 			return (1);
 	}
+	ft_printf("file =%s line\n", ptr);
+	fd = open(ptr, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	close(fd);
 	return (0);
 }
 
 static	int	add_textur2(t_texture *muur, char *str)
 {
 	char	*ptr;
+	int		fd;
 
 	ptr = str + 2;
 	while (*ptr && *ptr == ' ')
@@ -63,6 +78,10 @@ static	int	add_textur2(t_texture *muur, char *str)
 		if (!muur->east)
 			return (1);
 	}
+	fd = open(ptr, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	close(fd);
 	return (0);
 }
 
