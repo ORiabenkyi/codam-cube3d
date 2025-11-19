@@ -30,7 +30,6 @@ int	err_wrong_texture(t_game *game)
 	free(game->map);
 	free_texture(game->wall);
 	free(game->wall);
-	free(game);
 	ft_printf("Error! Can`t create texture.\n");
 	return (1);
 }

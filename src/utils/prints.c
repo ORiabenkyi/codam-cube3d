@@ -40,3 +40,20 @@ int	printm(t_game *game)
 	}
 	return (0);
 }
+
+
+int	printt(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	if (game->wall)
+	{
+		ft_printf("%s", game->wall->north);
+		ft_printf("%s", game->wall->south);
+		ft_printf("%s", game->wall->west);
+		ft_printf("%s", game->wall->east);
+		i++;
+	}
+	return (0);
+}

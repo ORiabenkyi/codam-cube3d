@@ -58,4 +58,8 @@ fclean: clean
 	$(RM) $(MLX_DIR)
 	@make fclean -C $(LIBFT_DIR)
 
-re: fclean all
+re: 
+	$(RM) $(NAME)
+	$(NAME) 
+	
+full: fclean all

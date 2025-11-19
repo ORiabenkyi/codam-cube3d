@@ -17,6 +17,9 @@ int	main(int count, char *arg[])
 	t_game		game;
 
 	if (init_game(&game, count, arg) != 0)
+	{
+		ft_printf("Wrong init game.\n");
 		return (1);
+	}	
 	return (0);
 }

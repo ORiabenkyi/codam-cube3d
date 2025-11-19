@@ -74,5 +74,6 @@ support functions
 
 int	prints(t_game *game);
 int	printm(t_game *game);
+int	printt(t_game *game);
 
 #endif
