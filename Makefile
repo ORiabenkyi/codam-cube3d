@@ -12,6 +12,7 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
 CFILES = 	src/cube3d.c \
+			src/utils/utils_file.c \
 			src/parser/init_game.c \
 			src/parser/is_valid_input.c \
 			src/utils/err_wrong_command.c \
@@ -19,9 +20,13 @@ CFILES = 	src/cube3d.c \
 			src/utils/err_wrong_in_file.c \
 			src/utils/err_wrong_alocate.c \
 			src/utils/err_wrong_texture.c \
+			src/utils/err_wrong_color.c \
+			src/utils/err_wrong_map.c \
 			src/utils/prints.c \
 			src/parser/feel_game.c \
 			src/parser/feel_texture.c \
+			src/parser/feel_color.c \
+			src/parser/feel_map.c \
 			src/engine/engine.c \
 
 OFILES = $(CFILES:.c=.o)

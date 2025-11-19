@@ -6,11 +6,21 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/15 17:53:00 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:23:30 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
+
+static	char	*add_textur(char *str, char *ptr)
+{
+	if (str)
+	{
+		free(str);
+		return (NULL);
+	}
+	return (ft_strdup(ptr));
+}
 
 static	int	add_textur1(t_texture *muur, char *str)
 {
@@ -21,24 +31,14 @@ static	int	add_textur1(t_texture *muur, char *str)
 		ptr++;
 	if (str[0] == 'N')
 	{
+		muur->north = add_textur(muur->north, ptr);
 		if (!muur->north)
-		{
-			muur->north = ft_strdup(ptr);
-			if (!muur->north)
-				return (1);
-		}
-		else
 			return (1);
 	}
 	if (str[0] == 'S')
 	{
+		muur->south = add_textur(muur->south, ptr);
 		if (!muur->south)
-		{
-			muur->south = ft_strdup(ptr);
-			if (!muur->south)
-				return (1);
-		}
-		else
 			return (1);
 	}
 	return (0);
@@ -53,24 +53,14 @@ static	int	add_textur2(t_texture *muur, char *str)
 		ptr++;
 	if (str[0] == 'W')
 	{
+		muur->west = add_textur(muur->west, ptr);
 		if (!muur->west)
-		{
-			muur->west = ft_strdup(ptr);
-			if (!muur->west)
-				return (1);
-		}
-		else
 			return (1);
 	}
 	if (str[0] == 'E')
 	{
+		muur->east = add_textur(muur->east, ptr);
 		if (!muur->east)
-		{
-			muur->east = ft_strdup(ptr);
-			if (!muur->east)
-				return (1);
-		}
-		else
 			return (1);
 	}
 	return (0);
@@ -90,7 +80,7 @@ int	feel_texture(t_game *game)
 		if (game->data[counter][0] == 'N' || game->data[counter][0] == 'S')
 			if (add_textur1(game->wall, game->data[counter]) != 0)
 				return (1);
-		if	(game->data[counter][0] == 'W' || game->data[counter][0] == 'E')
+		if (game->data[counter][0] == 'W' || game->data[counter][0] == 'E')
 			if (add_textur2(game->wall, game->data[counter]) != 0)
 				return (1);
 		counter++;

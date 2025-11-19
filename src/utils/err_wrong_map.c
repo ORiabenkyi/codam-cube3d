@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   err_wrong_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 15:32:20 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:31:20 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
 
-int	init_game(t_game *game, int count, char **arg)
+int	err_wrong_map(t_game *game)
 {
-	ft_bzero(game, sizeof(t_game));
-	if (is_valid_input(game, count, arg) != 0)
-		return (1);
-	// prints(game);
-	return (0);
+	free(game->file);
+	free(game->map);
+	free(game->wall);
+	ft_printf("Error! Can`t create map.\n");
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:57:00 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/15 14:17:02 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:25:35 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	main(int count, char *arg[])
 	{
 		ft_printf("Wrong init game.\n");
 		return (1);
-	}	
+	}
 	return (0);
 }

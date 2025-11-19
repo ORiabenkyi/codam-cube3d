@@ -6,14 +6,11 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/15 16:47:54 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:24:45 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
-
-static int	is_valid_file(char *file);
-// static int	is_valid_in_file(char *file);
 
 int	is_valid_input(t_game *game, int count, char **arg)
 {
@@ -25,43 +22,9 @@ int	is_valid_input(t_game *game, int count, char **arg)
 		return (1);
 	if (feel_texture(game) != 0)
 		return (err_wrong_texture(game));
-	// if (is_valid_in_file(arg[1]) != 0)
-	// 	return (err_wrong_in_file());
+	if (feel_color(game) != 0)
+		return (err_wrong_color(game));
+	if (feel_map(game) != 0)
+		return (err_wrong_map(game));
 	return (0);
 }
-
-static int	is_valid_file(char *file)
-{
-	int			fd;
-	const char	*extension;
-
-	fd = 0;
-	extension = ft_strchr(file, '.');
-	if (!extension)
-		return (1);
-	if (ft_strncmp(extension, ".cub", 4) != 0)
-		return (1);
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
-	return (0);
-}
-
-// static int	is_valid_in_file(char *file)
-// {
-// 	int			fd;
-// 	const char	*extension;
-
-// 	fd = 0;
-// 	extension = ft_strchr(file, '.');
-// 	if (!extension)
-// 		return (1);
-// 	if (ft_strncmp(extension, ".cub", 4) != 0)
-// 		return (1);
-// 	fd = open(file, O_RDONLY);
-// 	if (fd < 0)
-// 		return (1);
-// 	close(fd);
-// 	return (0);
-// }

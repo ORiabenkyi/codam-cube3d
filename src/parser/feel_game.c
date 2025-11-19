@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/15 16:47:40 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:24:52 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,6 @@ int	feel_game(t_game *game, char *file)
 	game->file = ft_strdup(file);
 	if (!game->file)
 		return (err_wrong_alocate());
-	game->map = (char **)malloc(sizeof(char *) * 1);
-	if (!game->map)
-		return (free(game->file), err_wrong_alocate());
-	// game->data = (char **)malloc(sizeof(char *) * 1);
-	// if (!game->data)
-	// 	return (free(game->map), free(game->file),
-	// 		err_wrong_alocate());
 	game->size_file = size_file(game->file);
 	if (game->size_file < 7)
 		return (free(game->map), free(game->file),

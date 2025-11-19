@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/15 14:16:15 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:21:04 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_game
 	char				*file;
 	char				**data;
 	int					size_file;
+	int					size_map;
+	size_t				size_line;
 	char				**map;
 	struct s_texture	*wall;
 	struct s_color		*floor;
@@ -51,10 +53,23 @@ typedef struct s_game
 	mlx_image_t			*img;
 }						t_game;
 
+/*
+support funcions
+*/
+
+int	is_valid_file(char *file);
+int	clean_array(char **array, int endig);
+
+/*
+step bu step
+*/
+
 int	init_game(t_game *game, int counter, char **argument);
 int	is_valid_input(t_game *game, int count, char **arg);
-int	feel_texture(t_game *game);
 int	feel_game(t_game *game, char *file);
+int	feel_texture(t_game *game);
+int	feel_color(t_game *game);
+int	feel_map(t_game *game);
 
 int	engine(t_game *game);
 
@@ -67,6 +82,8 @@ int	err_wrong_file(void);
 int	err_wrong_in_file(void);
 int	err_wrong_alocate(void);
 int	err_wrong_texture(t_game *game);
+int	err_wrong_color(t_game *game);
+int	err_wrong_map(t_game *game);
 
 /*
 support functions
@@ -74,6 +91,8 @@ support functions
 
 int	prints(t_game *game);
 int	printm(t_game *game);
+int	printd(t_game *game);
 int	printt(t_game *game);
+int	printc(t_game *game);
 
 #endif

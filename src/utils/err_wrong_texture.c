@@ -6,13 +6,13 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/14 18:14:40 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/19 13:53:12 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
 
-void	free_texture(t_texture *texture)
+static void	free_texture(t_texture *texture)
 {
 	if (texture->north)
 		free(texture->north);
