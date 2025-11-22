@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_file.c                                       :+:      :+:    :+:   */
+/*   utils_file2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:09:57 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/22 11:04:22 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 14:37:53 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,11 @@ int	is_valid_file(char *file)
 	if (ft_strncmp(extension, ".cub", 4) != 0)
 		return (1);
 	return (is_exist_file(file));
+}
+
+int	is_player_chareckter(int symbol)
+{
+	if (symbol == 'S' || symbol == 'N' || symbol == 'W' || symbol == 'E')
+		return (1);
+	return (0);
 }

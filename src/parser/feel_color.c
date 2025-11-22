@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 17:43:47 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:43:55 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	feel_color(t_game *game)
 		}
 		counter++;
 	}
-	printc(game);
 	if (!game->ceiling || !game->floor)
 		return (1);
 	return (0);

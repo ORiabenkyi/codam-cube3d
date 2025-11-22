@@ -12,7 +12,8 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
 CFILES = 	src/cube3d.c \
-			src/utils/utils_file.c \
+			src/utils/utils_file1.c \
+			src/utils/utils_file2.c \
 			src/parser/free_game.c \
 			src/parser/init_game.c \
 			src/parser/is_valid_input.c \
@@ -29,7 +30,7 @@ CFILES = 	src/cube3d.c \
 			src/parser/feel_texture.c \
 			src/parser/feel_color.c \
 			src/parser/feel_map.c \
-			src/parser/count_map.c \
+			src/parser/check_map.c \
 			src/engine/engine.c \
 
 OFILES = $(CFILES:.c=.o)

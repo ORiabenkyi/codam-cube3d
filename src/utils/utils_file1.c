@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.c                                           :+:      :+:    :+:   */
+/*   utils_file1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:57:00 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/22 11:35:11 by oriabenk         ###   ########.fr       */
+/*   Created: 2025/10/29 12:09:57 by oriabenk          #+#    #+#             */
+/*   Updated: 2025/11/22 14:37:38 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cube3d.h"
+#include "../../inc/cube3d.h"
 
-int	main(int count, char *arg[])
+int	is_map_ch(int symbol)
 {
-	t_game		game;
-
-	if (init_game(&game, count, arg) != 0)
-	{
-		ft_printf("Wrong init game.\n");
+	if (symbol == '1' || symbol == '0')
 		return (1);
-	}
-	printt(&game);
-	printc(&game);
-	printm(&game);
-	ft_printf("\n\t\t FILE !!!\n\n");
-	prints(&game);
-	free_game(&game);
 	return (0);
 }

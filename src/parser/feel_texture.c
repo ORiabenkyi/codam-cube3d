@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/22 11:03:14 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:43:43 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,5 @@ int	feel_texture(t_game *game)
 	{
 		return (1);
 	}
-	printt(game);
 	return (0);
 }

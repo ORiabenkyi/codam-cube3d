@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/22 11:08:10 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 14:37:41 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	is_exist_file(char *file);
 int	is_valid_file(char *file);
 int	clean_array(char **array, int endig);
 int	is_whitespace(int symbol);
+int	is_player_chareckter(int symbol);
+int	is_map_ch(int symbol);
 
 /*
 step bu step
@@ -72,7 +74,7 @@ int	feel_game(t_game *game, char *file);
 int	feel_texture(t_game *game);
 int	feel_color(t_game *game);
 int	feel_map(t_game *game);
-int	count_map(t_game *game);
+int	check_map(t_game *game);
 
 int	engine(t_game *game);
 

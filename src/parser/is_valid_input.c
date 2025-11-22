@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 17:46:35 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:40:45 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_valid_input(t_game *game, int count, char **arg)
 		return (err_wrong_color(game));
 	if (feel_map(game) != 0)
 		return (err_wrong_map(game));
-	if (count_map(game) != 0)
+	if (check_map(game) != 0)
 		return (err_wrong_on_map(game));
 	return (0);
 }

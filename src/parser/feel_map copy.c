@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/22 16:05:06 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 14:28:58 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,36 @@
 
 static int	is_service_line(char *str)
 {
-	if (str[0] == 'N' || str[0] == 'S' || str[0] == 'W' || str[0] == 'E'
-		|| str[0] == 'F' || str[0] == 'C' || str[0] == '\n')
+	if (str[0] == '\n')
+		return (1);
+	if (ft_strlen(str) < 4)
+		return (0);
+	if (str[0] == 'N' && str[1] == 'O' && (str[2] == ' ' || str[2] == '\t'))
+		return (1);
+	if (str[0] == 'S' && str[1] == 'O' && (str[2] == ' ' || str[2] == '\t'))
+		return (1);
+	if (str[0] == 'W' && str[1] == 'E' && (str[2] == ' ' || str[2] == '\t'))
+		return (1);
+	if (str[0] == 'E' && str[1] == 'S' && (str[2] == ' ' || str[2] == '\t'))
+		return (1);
+	if (str[0] == 'F' && (str[1] == ' ' || str[1] == '\t'))
+		return (1);
+	if (str[0] == 'C' && (str[1] == ' ' || str[1] == '\t'))
 		return (1);
 	return (0);
 }
 
-static	int	chek_that_map_closed(t_game *game, int i, int len, char ch)
+static	int	is_map_chareckter(int symbol)
 {
-	char	left;
-	char	up;
-	char	down;
-	char	right;
-
-	if (!(is_player_chareckter(ch) || ch == '0'))
-		return (0);
-	if (0 == i || 0 == len)
-		return (1);
-	if (game->size_map == i || (int)game->size_line == len)
-		return (1);
-	left = game->map[i - 1][len];
-	right = game->map[i + 1][len];
-	up = game->map[i][len - 1];
-	down = game->map[i][len + 1];
-	if (!(is_player_chareckter(left) || is_map_ch(left)))
+	if (symbol == '1' || symbol == '0')
 		return (1);
 	return (0);
 }
 
 static	int	checks_map(t_game *game)
 {
-	int		i;
-	int		len;
-	char	ch;
+	int	i;
+	int	len;
 
 	i = -1;
 	while (game->map[++i])
@@ -54,10 +51,9 @@ static	int	checks_map(t_game *game)
 		len = ft_strlen(game->map[i]);
 		while (len > 0)
 		{
-			ch = game->map[i][len - 1];
-			if (chek_that_map_closed(game, i, len, ch) != 0)
-				return (1);
-			if (is_whitespace(ch) || is_map_ch(ch) || is_player_chareckter(ch))
+			if (is_whitespace(game->map[i][len - 1]) ||
+				is_map_chareckter(game->map[i][len - 1])
+				|| is_player_chareckter(game->map[i][len - 1]))
 				len--;
 			else
 				return (1);
