@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 17:46:04 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:08:10 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_game
 support funcions
 */
 
+int	is_exist_file(char *file);
 int	is_valid_file(char *file);
 int	clean_array(char **array, int endig);
 int	is_whitespace(int symbol);
@@ -74,6 +75,12 @@ int	feel_map(t_game *game);
 int	count_map(t_game *game);
 
 int	engine(t_game *game);
+
+/*
+cleaners
+*/
+
+int	free_game(t_game *game);
 
 /*
 error managment

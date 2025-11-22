@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:09:57 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 16:46:13 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:04:22 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,26 @@ int	clean_array(char **array, int endig)
 	return (endig);
 }
 
-int	is_valid_file(char *file)
+int	is_exist_file(char *file)
 {
 	int			fd;
-	const char	*extension;
 
 	fd = 0;
-	extension = ft_strchr(file, '.');
-	if (!extension)
-		return (1);
-	if (ft_strncmp(extension, ".cub", 4) != 0)
-		return (1);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (1);
 	close(fd);
 	return (0);
+}
+
+int	is_valid_file(char *file)
+{
+	const char	*extension;
+
+	extension = ft_strchr(file, '.');
+	if (!extension)
+		return (1);
+	if (ft_strncmp(extension, ".cub", 4) != 0)
+		return (1);
+	return (is_exist_file(file));
 }

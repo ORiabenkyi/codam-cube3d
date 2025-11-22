@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/19 18:13:19 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/11/22 11:03:14 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static	char	*add_textur(char *str, char *ptr)
 static	int	add_textur1(t_texture *muur, char *str)
 {
 	char	*ptr;
-	int		fd;
 
 	ptr = str + 2;
 	while (*ptr && *ptr == ' ')
@@ -50,18 +49,12 @@ static	int	add_textur1(t_texture *muur, char *str)
 		if (!muur->south)
 			return (1);
 	}
-	ft_printf("file =%s line\n", ptr);
-	fd = open(ptr, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
 	return (0);
 }
 
 static	int	add_textur2(t_texture *muur, char *str)
 {
 	char	*ptr;
-	int		fd;
 
 	ptr = str + 2;
 	while (*ptr && *ptr == ' ')
@@ -78,10 +71,6 @@ static	int	add_textur2(t_texture *muur, char *str)
 		if (!muur->east)
 			return (1);
 	}
-	fd = open(ptr, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
 	return (0);
 }
 
@@ -103,6 +92,11 @@ int	feel_texture(t_game *game)
 			if (add_textur2(game->wall, game->data[counter]) != 0)
 				return (1);
 		counter++;
+	}
+	if (is_exist_file(game->wall->north) || is_exist_file(game->wall->west)
+		|| is_exist_file(game->wall->east) || is_exist_file(game->wall->south))
+	{
+		return (1);
 	}
 	printt(game);
 	return (0);

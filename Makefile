@@ -13,6 +13,7 @@ RM		= rm -rf
 
 CFILES = 	src/cube3d.c \
 			src/utils/utils_file.c \
+			src/parser/free_game.c \
 			src/parser/init_game.c \
 			src/parser/is_valid_input.c \
 			src/utils/err_wrong_command.c \
