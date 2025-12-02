@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.c                                           :+:      :+:    :+:   */
+/*   count_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 11:57:00 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/12/02 13:21:20 by oriabenk         ###   ########.fr       */
+/*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
+/*   Updated: 2025/11/19 17:45:29 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cube3d.h"
+#include "../../inc/cube3d.h"
 
-int	main(int count, char *arg[])
+int init_mlx(t_game *game)
 {
-	t_game		game;
-
-	if (init_game(&game, count, arg) != 0)
-	{
-		ft_printf("Wrong init game.\n");
-		return (1);
-	}
-	if (init_mlx(&game) != 0)
-	{
-		ft_printf("Wrong init mlx.\n");
-		return (1);
-	}
-	infinity_loop(&game);
-	free_all(&game);
-	return (0);
+    // Implementation of mlx initialization
+    return 0; // Return 0 on success, non-zero on failure
 }
