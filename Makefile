@@ -29,7 +29,8 @@ CFILES = 	src/cube3d.c \
 			src/parser/feel_color.c \
 			src/parser/feel_map.c \
 			src/parser/count_map.c \
-			src/engine/engine.c \
+			src/mlx/init_mlx.c \
+			src/engine/infinity_loop.c \
 
 OFILES = $(CFILES:.c=.o)
 

@@ -12,7 +12,7 @@
 
 #include "../../inc/cube3d.h"
 
-int	engine(t_game *game)
+int	infinity_loop(t_game *game)
 {
 	(void)game;
 	return (0);

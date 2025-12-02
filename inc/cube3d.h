@@ -73,7 +73,7 @@ int	feel_color(t_game *game);
 int	feel_map(t_game *game);
 int	count_map(t_game *game);
 
-int	engine(t_game *game);
+int	infinity_loop(t_game *game);
 
 /*
 error managment
