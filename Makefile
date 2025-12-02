@@ -30,9 +30,10 @@ CFILES = 	src/cube3d.c \
 			src/parser/feel_texture.c \
 			src/parser/feel_color.c \
 			src/parser/feel_map.c \
-			src/parser/count_map.c \
+			src/parser/check_map.c \
 			src/mlx/init_mlx.c \
 			src/engine/infinity_loop.c \
+			src/engine/free_all.c \
 
 OFILES = $(CFILES:.c=.o)
 

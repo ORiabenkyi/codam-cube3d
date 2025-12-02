@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 12:10:01 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/12/02 13:26:24 by oriabenk         ###   ########.fr       */
+/*   Created: 2025/10/29 12:10:08 by oriabenk          #+#    #+#             */
+/*   Updated: 2025/12/02 13:30:26 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cube3d.h"
 
-int	init_mlx(t_game *game)
+int	free_all( t_game *game)
 {
 	(void)game;
-	// Implementation of mlx initialization
-	return (0); // Return 0 on success, non-zero on failure
+	return (0);
 }

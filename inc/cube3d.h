@@ -6,7 +6,7 @@
 /*   By: oriabenk <oriabenk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 11:56:31 by oriabenk          #+#    #+#             */
-/*   Updated: 2025/11/22 14:37:41 by oriabenk         ###   ########.fr       */
+/*   Updated: 2025/12/02 13:30:47 by oriabenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,18 @@ int	feel_color(t_game *game);
 int	feel_map(t_game *game);
 int	check_map(t_game *game);
 
+/*
+mlx
+*/
+
+int	init_mlx(t_game *game);
+
+/*
+core
+*/
+
 int	infinity_loop(t_game *game);
+int	free_all( t_game *game);
 
 /*
 cleaners
