@@ -12,18 +12,8 @@
 
 #include "../../inc/cube3d.h"
 
-int	init_mlx(t_game *game)
+int	handel_mouse(t_game *game)
 {
 	(void)game;
-	if (!game || !game->map)
-		return (1);
-	game->mlx = mlx_init(RESOLUTIONW, RESOLUTIONH, TITEL, 0);
-	if (!game->mlx)
-		return (error_define_mlx());
-	mlx_cursor_hook(game->mlx, &handel_mouse, &game);
-	mlx_key_hook(game->mlx, &handel_keys, &game);
-	mlx_loop_hook(game->mlx, &rebuild_window, &game);
-	mlx_loop(game->mlx);
-
 	return (0);
 }

@@ -20,6 +20,10 @@
 # include <string.h>
 # include <unistd.h>
 
+# define RESOLUTIONW 800
+# define RESOLUTIONH 600
+# define TITEL "MAZE 3D"
+
 # include "../libs/MLX42/include/MLX42/MLX42.h"
 # include "../libs/libft/inc/libft.h"
 
@@ -81,6 +85,9 @@ mlx
 */
 
 int	init_mlx(t_game *game);
+int	handel_mouse(t_game *game);
+int	handel_keys(t_game *game);
+int	rebuild_window(t_game *game);
 
 /*
 core

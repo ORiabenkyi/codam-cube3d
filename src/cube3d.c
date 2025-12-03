@@ -19,14 +19,15 @@ int	main(int count, char *arg[])
 	if (init_game(&game, count, arg) != 0)
 	{
 		ft_printf("Wrong init game.\n");
+		free_all(&game);
 		return (1);
 	}
 	if (init_mlx(&game) != 0)
 	{
 		ft_printf("Wrong init mlx.\n");
+		free_all(&game);
 		return (1);
 	}
-	infinity_loop(&game);
 	free_all(&game);
 	return (0);
 }
