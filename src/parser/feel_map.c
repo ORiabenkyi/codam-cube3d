@@ -23,9 +23,9 @@ static int	is_service_line(char *str)
 static	int	chek_that_map_closed(t_game *game, int i, int len, char ch)
 {
 	char	left;
+	char	right;
 	char	up;
 	char	down;
-	char	right;
 
 	if (!(is_player_chareckter(ch) || ch == '0'))
 		return (0);
@@ -38,7 +38,13 @@ static	int	chek_that_map_closed(t_game *game, int i, int len, char ch)
 	up = game->map[i][len - 1];
 	down = game->map[i][len + 1];
 	if (!(is_player_chareckter(left) || is_map_ch(left)))
-		return (1);
+		return (0);
+	if (!(is_player_chareckter(right) || is_map_ch(right)))
+		return (0);
+	if (!(is_player_chareckter(up) || is_map_ch(up)))
+		return (0);
+	if (!(is_player_chareckter(down) || is_map_ch(down)))
+		return (0);
 	return (0);
 }
 

@@ -22,6 +22,7 @@ int	init_mlx(t_game *game)
 		return (error_define_mlx());
 	mlx_cursor_hook(game->mlx, &handel_mouse, &game);
 	mlx_key_hook(game->mlx, &handel_keys, &game);
+	mlx_close_hook(game->mlx, &handle_window_close, &game);
 	mlx_loop_hook(game->mlx, &rebuild_window, &game);
 	mlx_loop(game->mlx);
 

@@ -12,8 +12,10 @@
 
 #include "../../inc/cube3d.h"
 
-int	rebuild_window(t_game *game)
+void	rebuild_window(void *param)
 {
+	t_game	*game;
+
+	game = (t_game *)param;
 	(void)game;
-	return (0);
 }

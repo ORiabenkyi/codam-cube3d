@@ -42,6 +42,14 @@ typedef struct s_color
 	unsigned char		blue;
 }					t_color;
 
+/*
+file - path to the .cub file
+data - array of strings that contain lines from the .cub file
+size_file - number of lines in the .cub file
+size_map - number of lines in the map
+size_line - length of the longest line in the map
+map - 2D array representing the game map
+*/
 typedef struct s_game
 {
 	char				*file;
@@ -84,10 +92,11 @@ int	check_map(t_game *game);
 mlx
 */
 
-int	init_mlx(t_game *game);
-int	handel_mouse(t_game *game);
-int	handel_keys(t_game *game);
-int	rebuild_window(t_game *game);
+int		init_mlx(t_game *game);
+void	handel_mouse(double x, double y, void *param);
+void	handel_keys(mlx_key_data_t keydruck, void *param);
+void	rebuild_window(void *param);
+void	handle_window_close(void *param);
 
 /*
 core
@@ -114,6 +123,7 @@ int	err_wrong_texture(t_game *game);
 int	err_wrong_color(t_game *game);
 int	err_wrong_map(t_game *game);
 int	err_wrong_on_map(t_game *game);
+int	error_define_mlx();
 
 /*
 support functions

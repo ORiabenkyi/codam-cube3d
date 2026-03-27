@@ -12,8 +12,12 @@
 
 #include "../../inc/cube3d.h"
 
-int	handel_mouse(t_game *game)
+void	handel_mouse(double x, double y, void *param)
 {
+	t_game	*game;
+
+	game = (t_game *)param;
+	(void)y;
+	(void)x;
 	(void)game;
-	return (0);
 }
