@@ -28,18 +28,12 @@ int	ft_error(char *msg)
 
 void	free_map(t_map *map)
 {
-	int	i;
-
 	free(map->no);
 	free(map->so);
 	free(map->we);
 	free(map->ea);
 	free_array(map->grid);
 	free(map->doors);
-	free(map->sprites);
-	i = 0;
-	while (i < map->sp_count)
-		free(map->sp[i++]);
 	map->no = NULL;
 	map->so = NULL;
 	map->we = NULL;
@@ -47,9 +41,6 @@ void	free_map(t_map *map)
 	map->grid = NULL;
 	map->doors = NULL;
 	map->door_count = 0;
-	map->sprites = NULL;
-	map->sprite_count = 0;
-	map->sp_count = 0;
 }
 
 /*
@@ -78,7 +69,7 @@ int	is_map_line(char *line)
 		return (0);
 	while (*line)
 	{
-		if (!ft_strchr("012DHNSEW \t", *line))
+		if (!ft_strchr("01DNSEW \t", *line))
 			return (0);
 		line++;
 	}

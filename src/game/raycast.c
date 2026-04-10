@@ -115,13 +115,12 @@ static void	dda(t_game *game, t_ray *ray)
 		cell = grid[ray->map_y][ray->map_x];
 		if (cell == '1')
 			break ;
-		if (cell == 'D' || cell == 'H')
+		if (cell == 'D')
 		{
 			door = find_door(&game->map, ray->map_x, ray->map_y);
 			if (!door || door->state == DOOR_CLOSED)
 			{
-				if (cell == 'D')
-					ray->is_door = 1;
+				ray->is_door = 1;
 				break ;
 			}
 			/* DOOR_OPEN: ray passes through */
@@ -228,7 +227,6 @@ static void	draw_column(t_game *game, t_ray *ray, int x)
 void	render_frame(t_game *game)
 {
 	t_ray	ray;
-	double	zbuf[SCREEN_W];
 	int		x;
 
 	x = 0;
@@ -238,8 +236,6 @@ void	render_frame(t_game *game)
 		dda(game, &ray);
 		calc_wall(game, &ray);
 		draw_column(game, &ray, x);
-		zbuf[x] = ray.wall_dist;
 		x++;
 	}
-	draw_sprites(game, zbuf);
 }

@@ -61,8 +61,6 @@ static void	draw_rect(t_game *game, int px, int py, int w, int h, uint32_t col)
 **   '1'        → dark grey (wall)
 **   'D' closed → brown
 **   'D' open   → gold
-**   'H' closed → dark grey (indistinguishable from wall)
-**   'H' open   → gold (same as regular open door)
 **   ' '        → transparent black
 **   other      → medium grey (floor / player spawn)
 */
@@ -81,13 +79,6 @@ static uint32_t	cell_color(t_game *game, int mx, int my)
 		door = find_door(&game->map, mx, my);
 		if (!door || door->state == DOOR_CLOSED)
 			return (0x8B4513FF);
-		return (0xFFD700FF);
-	}
-	if (c == 'H')
-	{
-		door = find_door(&game->map, mx, my);
-		if (!door || door->state == DOOR_CLOSED)
-			return (0x333333FF);
 		return (0xFFD700FF);
 	}
 	return (0x888888FF);

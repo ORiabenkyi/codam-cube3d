@@ -22,10 +22,6 @@
 /* ---------- Doors ---------- */
 # define DOOR_CLOSE_TIME 30.0
 
-/* ---------- Sprites ---------- */
-# define MAX_SP_FRAMES   16
-# define SPRITE_FPS      8.0
-
 /* ---------- Minimap ---------- */
 # define MINI_CELL   6
 # define MINI_MARGIN 10
@@ -46,19 +42,11 @@
 # define ERR_MAP     "Missing map"
 # define ERR_PLAYER  "Map must have exactly one player spawn (N/S/E/W)"
 # define ERR_CLOSED  "Map is not surrounded by walls"
-# define ERR_CHAR    "Invalid character in map (only 0, 1, 2, D, H, N, S, E, W, space)"
+# define ERR_CHAR    "Invalid character in map (only 0, 1, D, N, S, E, W, space)"
 # define ERR_MISS    "Missing required identifier (NO/SO/WE/EA/F/C)"
 # define ERR_AFTER   "Content not allowed after map"
 # define ERR_MEM     "Memory allocation failed"
 # define ERR_TEX     "Failed to load texture"
-
-/* ---------- Sprite ---------- */
-
-typedef struct s_sprite
-{
-	double	x;
-	double	y;
-}	t_sprite;
 
 /* ---------- Door ---------- */
 
@@ -74,7 +62,6 @@ typedef struct s_door
 	int				y;
 	t_door_state	state;
 	double			timer;
-	int				hidden;
 }	t_door;
 
 /* ---------- Map ---------- */
@@ -102,12 +89,8 @@ typedef struct s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
-	t_door		*doors;
-	int			door_count;
-	char		*sp[MAX_SP_FRAMES];
-	int			sp_count;
-	t_sprite	*sprites;
-	int			sprite_count;
+	t_door	*doors;
+	int		door_count;
 }	t_map;
 
 /* ---------- Player ---------- */
@@ -160,9 +143,6 @@ typedef struct s_game
 	int				key_m_prev;
 	int				show_minimap;
 	int				mouse_x;
-	mlx_texture_t	*sp_tex[MAX_SP_FRAMES];
-	int				sp_frame;
-	double			sp_timer;
 }	t_game;
 
 /* ---------- Prototypes ---------- */
@@ -197,7 +177,7 @@ void	game_loop(void *param);
 void	render_frame(t_game *game);
 
 /* move.c */
-int	can_move(t_game *game, double new_x, double new_y);
+int		can_move(t_game *game, double new_x, double new_y);
 void	move_forward(t_game *game, double speed);
 void	strafe(t_game *game, double speed);
 void	rotate(t_game *game, double angle);
@@ -210,9 +190,5 @@ void	update_doors(t_game *game);
 
 /* minimap.c */
 void	draw_minimap(t_game *game);
-
-/* sprite.c */
-void	draw_sprites(t_game *game, double *zbuf);
-void	update_sprites(t_game *game);
 
 #endif

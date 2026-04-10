@@ -11,7 +11,6 @@ void	game_loop(void *param)
 	game = (t_game *)param;
 	handle_keys(game);
 	update_doors(game);
-	update_sprites(game);
 	render_frame(game);
 	draw_minimap(game);
 }

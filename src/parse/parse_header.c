@@ -108,15 +108,6 @@ int	parse_header_line(t_map *map, char *line)
 			return (ft_error(ERR_COLOR));
 		map->has_ceiling = 1;
 	}
-	else if (!ft_strncmp(line, "SP ", 3))
-	{
-		if (map->sp_count >= MAX_SP_FRAMES)
-			return (ft_error("Too many SP frames (max 16)"));
-		map->sp[map->sp_count] = ft_strtrim(line + 3, " \t");
-		if (!map->sp[map->sp_count] || !*map->sp[map->sp_count])
-			return (ft_error("SP: missing texture path"));
-		map->sp_count++;
-	}
 	else
 		return (ft_error(ERR_FIELD));
 	return (0);

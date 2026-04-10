@@ -53,21 +53,6 @@ static int	load_textures(t_game *game)
 	return (0);
 }
 
-static int	load_sprite_textures(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < game->map.sp_count)
-	{
-		game->sp_tex[i] = mlx_load_png(game->map.sp[i]);
-		if (!game->sp_tex[i])
-			return (ft_error(ERR_TEX));
-		i++;
-	}
-	return (0);
-}
-
 /*
 ** Frees all MLX resources and the parsed map.
 ** NULL-ifies every pointer after release to make double-call safe.
@@ -86,16 +71,6 @@ void	cleanup(t_game *game)
 		{
 			mlx_delete_texture(game->tex[i]);
 			game->tex[i] = NULL;
-		}
-		i++;
-	}
-	i = 0;
-	while (i < game->map.sp_count)
-	{
-		if (game->sp_tex[i])
-		{
-			mlx_delete_texture(game->sp_tex[i]);
-			game->sp_tex[i] = NULL;
 		}
 		i++;
 	}
@@ -130,8 +105,6 @@ int	init_game(t_game *game)
 	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
 		return (ft_error("MLX image_to_window failed"));
 	if (load_textures(game) == -1)
-		return (-1);
-	if (load_sprite_textures(game) == -1)
 		return (-1);
 	init_player(game);
 	game->show_minimap = 1;

@@ -24,9 +24,7 @@ CFILES =	src/cube3d.c \
 			src/game/raycast.c \
 			src/game/move.c \
 			src/game/doors.c \
-			src/game/minimap.c \
-			src/game/sprite.c \
-
+			src/game/minimap.c 
 
 OFILES = $(CFILES:.c=.o)
 
