@@ -10,23 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cube3d.h"
+#include "cube3d.h"
 
-int	main(int count, char *arg[])
+int	main(int argc, char **argv)
 {
-	t_game		game;
+	t_game	game;
 
-	if (init_game(&game, count, arg) != 0)
+	if (argc != 2)
 	{
-		ft_printf("Wrong init game.\n");
+		ft_error(ERR_ARGS);
 		return (1);
 	}
-	if (init_mlx(&game) != 0)
+	ft_bzero(&game, sizeof(t_game));
+	if (parse_file(&game, argv[1]) == -1)
 	{
-		ft_printf("Wrong init mlx.\n");
+		free_map(&game.map);
 		return (1);
 	}
-	infinity_loop(&game);
-	free_all(&game);
+	if (init_game(&game) == -1)
+	{
+		cleanup(&game);
+		return (1);
+	}
+	mlx_loop_hook(game.mlx, game_loop, &game);
+	mlx_loop(game.mlx);
+	cleanup(&game);
 	return (0);
 }

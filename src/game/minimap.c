@@ -1,0 +1,168 @@
+#include "cube3d.h"
+
+/*
+** Minimap context: pixel origin (ox, oy) = top-right corner with margin,
+** and the cell pixel size (cz) after auto-scaling.
+*/
+typedef struct s_mctx
+{
+	int	ox;
+	int	oy;
+	int	cz;
+}	t_mctx;
+
+/*
+** Computes the minimap context.
+** Cell size starts at MINI_CELL and shrinks until the map fits in MINI_MAX.
+** Origin is placed so the right edge is MINI_MARGIN px from screen right,
+** and the top edge is MINI_MARGIN px from screen top.
+*/
+static t_mctx	make_ctx(t_game *game)
+{
+	t_mctx	c;
+	int		cz;
+
+	cz = MINI_CELL;
+	while (cz > 1
+		&& (game->map.cols * cz > MINI_MAX
+			|| game->map.rows * cz > MINI_MAX))
+		cz--;
+	c.cz = cz;
+	c.ox = SCREEN_W - MINI_MARGIN - game->map.cols * cz;
+	c.oy = MINI_MARGIN;
+	return (c);
+}
+
+/*
+** Fills a rectangle [px, px+w) x [py, py+h) with color on game->image.
+** Clips to screen bounds.
+*/
+static void	draw_rect(t_game *game, int px, int py, int w, int h, uint32_t col)
+{
+	int	x;
+	int	y;
+
+	y = py;
+	while (y < py + h)
+	{
+		x = px;
+		while (x < px + w)
+		{
+			if (x >= 0 && x < SCREEN_W && y >= 0 && y < SCREEN_H)
+				mlx_put_pixel(game->image, x, y, col);
+			x++;
+		}
+		y++;
+	}
+}
+
+/*
+** Returns the color for a single map cell for the minimap.
+**   '1'        → dark grey (wall)
+**   'D' closed → brown
+**   'D' open   → gold
+**   'H' closed → dark grey (indistinguishable from wall)
+**   'H' open   → gold (same as regular open door)
+**   ' '        → transparent black
+**   other      → medium grey (floor / player spawn)
+*/
+static uint32_t	cell_color(t_game *game, int mx, int my)
+{
+	char	c;
+	t_door	*door;
+
+	c = game->map.grid[my][mx];
+	if (c == '1')
+		return (0x333333FF);
+	if (c == ' ')
+		return (0x00000088);
+	if (c == 'D')
+	{
+		door = find_door(&game->map, mx, my);
+		if (!door || door->state == DOOR_CLOSED)
+			return (0x8B4513FF);
+		return (0xFFD700FF);
+	}
+	if (c == 'H')
+	{
+		door = find_door(&game->map, mx, my);
+		if (!door || door->state == DOOR_CLOSED)
+			return (0x333333FF);
+		return (0xFFD700FF);
+	}
+	return (0x888888FF);
+}
+
+/*
+** Draws every cell of the map grid as a filled rectangle.
+*/
+static void	draw_cells(t_game *game, t_mctx *c)
+{
+	int	mx;
+	int	my;
+	int	col_len;
+
+	my = 0;
+	while (my < game->map.rows)
+	{
+		col_len = (int)ft_strlen(game->map.grid[my]);
+		mx = 0;
+		while (mx < col_len)
+		{
+			draw_rect(game,
+				c->ox + mx * c->cz,
+				c->oy + my * c->cz,
+				c->cz - 1,
+				c->cz - 1,
+				cell_color(game, mx, my));
+			mx++;
+		}
+		my++;
+	}
+}
+
+/*
+** Draws the player as a 3x3 red dot and a short white direction line.
+*/
+static void	draw_player(t_game *game, t_mctx *c)
+{
+	t_player	*p;
+	int			px;
+	int			py;
+	int			i;
+	int			ex;
+	int			ey;
+
+	p = &game->player;
+	px = c->ox + (int)(p->pos_x * c->cz);
+	py = c->oy + (int)(p->pos_y * c->cz);
+	draw_rect(game, px - 1, py - 1, 3, 3, 0xFF0000FF);
+	ex = px + (int)(p->dir_x * c->cz * 1.5);
+	ey = py + (int)(p->dir_y * c->cz * 1.5);
+	i = 0;
+	while (i <= c->cz)
+	{
+		int	lx;
+		int	ly;
+
+		lx = px + (ex - px) * i / c->cz;
+		ly = py + (ey - py) * i / c->cz;
+		if (lx >= 0 && lx < SCREEN_W && ly >= 0 && ly < SCREEN_H)
+			mlx_put_pixel(game->image, lx, ly, 0xFFFFFFFF);
+		i++;
+	}
+}
+
+/*
+** Draws the minimap in the top-right corner if show_minimap is set.
+*/
+void	draw_minimap(t_game *game)
+{
+	t_mctx	c;
+
+	if (!game->show_minimap)
+		return ;
+	c = make_ctx(game);
+	draw_cells(game, &c);
+	draw_player(game, &c);
+}

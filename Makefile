@@ -2,38 +2,29 @@ MLX_DIR	= libs/MLX42
 MLX_LIB	= $(MLX_DIR)/build/libmlx42.a
 
 LIBFT_DIR = libs/libft
-LIBFT_LIB = libs/libft/libft.a
+LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
-INC		= -I./libs/libft/inc/libft.h -I./inc/cube3d.h
+INC		 = -I./libs/libft/inc -I./inc -I./libs/MLX42/include
 
-NAME	= cub3d
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g3
-RM		= rm -rf
+NAME	 = cub3d
+CC		 = cc
+CFLAGS	 = -Wall -Wextra -Werror -g3
+MLXFLAGS = -ldl -lglfw -pthread -lm
+RM		 = rm -rf
 
-CFILES = 	src/cube3d.c \
-			src/utils/utils_file1.c \
-			src/utils/utils_file2.c \
-			src/parser/free_game.c \
-			src/parser/init_game.c \
-			src/parser/is_valid_input.c \
-			src/utils/err_wrong_command.c \
-			src/utils/err_wrong_file.c \
-			src/utils/err_wrong_in_file.c \
-			src/utils/err_wrong_alocate.c \
-			src/utils/err_wrong_texture.c \
-			src/utils/err_wrong_color.c \
-			src/utils/err_wrong_map.c \
-			src/utils/err_wrong_on_map.c \
-			src/utils/prints.c \
-			src/parser/feel_game.c \
-			src/parser/feel_texture.c \
-			src/parser/feel_color.c \
-			src/parser/feel_map.c \
-			src/parser/check_map.c \
-			src/mlx/init_mlx.c \
-			src/engine/infinity_loop.c \
-			src/engine/free_all.c \
+CFILES =	src/cube3d.c \
+			src/parse/parse.c \
+			src/parse/parse_header.c \
+			src/parse/parse_map.c \
+			src/parse/parse_utils.c \
+			src/game/game_init.c \
+			src/game/game_loop.c \
+			src/game/raycast.c \
+			src/game/move.c \
+			src/game/doors.c \
+			src/game/minimap.c \
+			src/game/sprite.c \
+
 
 OFILES = $(CFILES:.c=.o)
 
@@ -51,23 +42,26 @@ $(MLX_LIB):
 # Create libft part of the project
 # -----------------------	
 $(LIBFT_LIB):
+	git clone git@github.com:ORiabenkyi/codam-libft.git $(LIBFT_DIR) || true
 	make -C $(LIBFT_DIR)	
 # -----------------------
 # Create main part of the project
 # -----------------------
+%.o: %.c
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
 $(NAME): $(OFILES)
-	$(CC) $(CFLAGS) $(OFILES) $(INC) $(LIBFT_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OFILES) $(LIBFT_LIB) $(MLX_LIB) $(MLXFLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OFILES)
-	@make clean -C $(LIBFT_DIR)
 
 mlx: $(MLX_LIB)
 
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(MLX_DIR)
-	@make fclean -C $(LIBFT_DIR)
+	$(RM) $(LIBFT_DIR)
 
 re: fclean all
 
