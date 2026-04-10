@@ -19,6 +19,8 @@ CFILES =	src/cube3d.c \
 			src/parse/parse_utils.c \
 			src/game/game_init.c \
 			src/game/game_loop.c \
+			src/game/can_move.c \
+			src/game/handle_keys.c \
 			src/game/raycast.c \
 			src/game/move.c \
 			src/game/doors.c \

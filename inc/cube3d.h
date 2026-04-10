@@ -197,6 +197,10 @@ void	game_loop(void *param);
 void	render_frame(t_game *game);
 
 /* move.c */
+int	can_move(t_game *game, double new_x, double new_y);
+void	move_forward(t_game *game, double speed);
+void	strafe(t_game *game, double speed);
+void	rotate(t_game *game, double angle);
 void	handle_keys(t_game *game);
 
 /* doors.c */
