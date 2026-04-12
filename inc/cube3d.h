@@ -11,6 +11,7 @@
 /* ---------- Window ---------- */
 # define SCREEN_W        1280
 # define SCREEN_H        720
+# define FULLSCREEN      true
 
 /* ---------- Player ---------- */
 # define MOVE_SPEED      0.05
@@ -26,6 +27,12 @@
 # define MINI_CELL   6
 # define MINI_MARGIN 10
 # define MINI_MAX    240
+# define MINI_VIEW   20
+
+/* ---------- Player info overlay ---------- */
+# define INFO_LINES  3
+# define INFO_X      10
+# define INFO_Y      10
 
 /* ---------- Texture indices ---------- */
 # define TEX_NO     0
@@ -141,54 +148,74 @@ typedef struct s_game
 	mlx_texture_t	*tex[4];
 	int				key_e_prev;
 	int				key_m_prev;
+	int				key_i_prev;
+	int				key_tab_prev;
 	int				show_minimap;
+	int				minimap_full;
+	int				show_info;
 	int				mouse_x;
+	mlx_image_t		*info_img;
 }	t_game;
 
 /* ---------- Prototypes ---------- */
 
-/* parse.c */
-int		parse_file(t_game *game, char *path);
+/* utils */
+int			ft_error(char *msg);
+void		free_array(char **arr);
+void		free_map(t_map *map);
+int			is_empty_line(char *line);
+int			is_map_line(char *line);
 
-/* parse_header.c */
-int		parse_header_line(t_map *map, char *line);
-int		headers_complete(t_map *map);
-int		parse_color(char *str, t_color *c);
+/* parser */
+int			check_extension(char *path);
+char		**read_all_lines(int fd, int *count);
+int			check_no_content_after(char **all_lines, int total, int from);
+int			parse_header_line(t_map *map, char *line);
+int			headers_complete(t_map *map);
+int			parse_color(char *str, t_color *c);
+int			append_map_line(char ***lines, int *count, int *map_cap, char *line);
+int			build_map_grid(t_map *map, char **lines, int count);
+int			collect_doors(t_map *map);
+int			validate_map(t_map *map);
+int			parse_file(t_game *game, char *path);
 
-/* parse_map.c */
-int		build_map_grid(t_map *map, char **lines, int count);
-int		validate_map(t_map *map);
+/* game init*/
+int			init_game(t_game *game);
+void		cleanup(t_game *game);
 
-/* parse_utils.c */
-int		ft_error(char *msg);
-void	free_array(char **arr);
-void	free_map(t_map *map);
-int		is_empty_line(char *line);
-int		is_map_line(char *line);
+/* game loop */
+void		game_loop(void *param);
+void		handle_keys(t_game *game);
 
-/* game_init.c */
-int		init_game(t_game *game);
-void	cleanup(t_game *game);
-
-/* game_loop.c */
-void	game_loop(void *param);
+/* raycast_dda.c */
+void		init_ray(t_game *game, t_ray *ray, int x);
+void		dda(t_game *game, t_ray *ray);
+void		calc_wall(t_game *game, t_ray *ray);
 
 /* raycast.c */
-void	render_frame(t_game *game);
+void		render_frame(t_game *game);
 
-/* move.c */
-int		can_move(t_game *game, double new_x, double new_y);
-void	move_forward(t_game *game, double speed);
-void	strafe(t_game *game, double speed);
-void	rotate(t_game *game, double angle);
-void	handle_keys(t_game *game);
+/* move*/
+int			can_move(t_game *game, double new_x, double new_y);
+void		move_forward(t_game *game, double speed);
+void		strafe(t_game *game, double speed);
+void		rotate(t_game *game, double angle);
 
-/* doors.c */
-t_door	*find_door(t_map *map, int x, int y);
-void	interact_door(t_game *game);
-void	update_doors(t_game *game);
+/* doors */
+
+void		update_doors(t_game *game);
+int			player_in_door(t_game *game, t_door *door);
+t_door		*find_door(t_map *map, int x, int y);
+void		interact_door(t_game *game);
+
+/* minimap_utils.c */
+void		draw_rect(t_game *game, int px, int py, int w, int h, uint32_t col);
+uint32_t	cell_color(t_game *game, int mx, int my);
 
 /* minimap.c */
-void	draw_minimap(t_game *game);
+void		draw_minimap(t_game *game);
+
+/* player_info.c */
+void		draw_player_info(t_game *game);
 
 #endif

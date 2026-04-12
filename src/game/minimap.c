@@ -34,57 +34,6 @@ static t_mctx	make_ctx(t_game *game)
 }
 
 /*
-** Fills a rectangle [px, px+w) x [py, py+h) with color on game->image.
-** Clips to screen bounds.
-*/
-static void	draw_rect(t_game *game, int px, int py, int w, int h, uint32_t col)
-{
-	int	x;
-	int	y;
-
-	y = py;
-	while (y < py + h)
-	{
-		x = px;
-		while (x < px + w)
-		{
-			if (x >= 0 && x < SCREEN_W && y >= 0 && y < SCREEN_H)
-				mlx_put_pixel(game->image, x, y, col);
-			x++;
-		}
-		y++;
-	}
-}
-
-/*
-** Returns the color for a single map cell for the minimap.
-**   '1'        → dark grey (wall)
-**   'D' closed → brown
-**   'D' open   → gold
-**   ' '        → transparent black
-**   other      → medium grey (floor / player spawn)
-*/
-static uint32_t	cell_color(t_game *game, int mx, int my)
-{
-	char	c;
-	t_door	*door;
-
-	c = game->map.grid[my][mx];
-	if (c == '1')
-		return (0x333333FF);
-	if (c == ' ')
-		return (0x00000088);
-	if (c == 'D')
-	{
-		door = find_door(&game->map, mx, my);
-		if (!door || door->state == DOOR_CLOSED)
-			return (0x8B4513FF);
-		return (0xFFD700FF);
-	}
-	return (0x888888FF);
-}
-
-/*
 ** Draws every cell of the map grid as a filled rectangle.
 */
 static void	draw_cells(t_game *game, t_mctx *c)

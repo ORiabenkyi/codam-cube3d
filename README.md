@@ -15,7 +15,8 @@ Controls: `W A S D` — move, `← →` / mouse — rotate, `E` — interact wit
 
 ## Resources
 
-- [Lode's Raycasting Tutorial](https://lodev.org/cgtutor/raycasting.html) — primary reference for the DDA algorithm and texture mapping.
+- [Lode's raycasting tutorial](https://lodev.org/cgtutor/raycasting.html) — primary reference for the DDA algorithm and texture mapping.
+- [Another one raycasting Tutorial](https://ismailassil.medium.com/ray-casting-c-8bfae2c2fc13) — Tutorial from medium.
 - [MLX42 documentation](https://github.com/codam-coding-college/MLX42) — graphics library used for window, image, and input handling.
 
 

@@ -21,12 +21,32 @@ static void	handle_mouse(t_game *game)
 }
 
 /*
+** Handles single-press toggles for M (minimap) and I (player info).
+*/
+static void	handle_toggles(t_game *game)
+{
+	int	m_down;
+	int	i_down;
+
+	m_down = mlx_is_key_down(game->mlx, MLX_KEY_M);
+	if (m_down && !game->key_m_prev)
+		game->show_minimap = !game->show_minimap;
+	game->key_m_prev = m_down;
+	i_down = mlx_is_key_down(game->mlx, MLX_KEY_I);
+	if (i_down && !game->key_i_prev)
+		game->show_info = !game->show_info;
+	game->key_i_prev = i_down;
+}
+
+/*
 W / ↑          → move forward
 S / ↓          → move backward
 A              → strafe left
 D              → strafe right
-← / →         → rotate left / right
+← / →          → rotate left / right
 E              → interact with door (single press, not hold)
+M              → toggle minimap
+I              → toggle player info overlay
 ESC            → close window
 Mouse X        → rotate left / right
 */
@@ -55,12 +75,5 @@ void	handle_keys(t_game *game)
 	if (e_down && !game->key_e_prev)
 		interact_door(game);
 	game->key_e_prev = e_down;
-	{
-		int	m_down;
-
-		m_down = mlx_is_key_down(mlx, MLX_KEY_M);
-		if (m_down && !game->key_m_prev)
-			game->show_minimap = !game->show_minimap;
-		game->key_m_prev = m_down;
-	}
+	handle_toggles(game);
 }

@@ -4,7 +4,7 @@ MLX_LIB	= $(MLX_DIR)/build/libmlx42.a
 LIBFT_DIR = libs/libft
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
-INC		 = -I./libs/libft/inc -I./inc -I./libs/MLX42/include
+INC		 = -I./libs/libft/ -I./inc -I./libs/MLX42/include
 
 NAME	 = cub3d
 CC		 = cc
@@ -14,17 +14,26 @@ RM		 = rm -rf
 
 CFILES =	src/cube3d.c \
 			src/parse/parse.c \
+			src/parse/check_extension.c \
+			src/parse/parse_io.c \
 			src/parse/parse_header.c \
 			src/parse/parse_map.c \
+			src/parse/parse_grid.c \
 			src/parse/parse_utils.c \
 			src/game/game_init.c \
 			src/game/game_loop.c \
 			src/game/can_move.c \
 			src/game/handle_keys.c \
 			src/game/raycast.c \
+			src/game/raycast_dda.c \
 			src/game/move.c \
-			src/game/doors.c \
-			src/game/minimap.c 
+			src/game/find_door.c \
+			src/game/interact_door.c \
+			src/game/update_doors.c \
+	        src/game/player_in_door.c \
+			src/game/minimap.c \
+			src/game/minimap_utils.c \
+			src/game/player_info.c
 
 OFILES = $(CFILES:.c=.o)
 

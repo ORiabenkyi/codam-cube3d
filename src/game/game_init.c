@@ -108,7 +108,7 @@ int	init_game(t_game *game)
 		return (-1);
 	init_player(game);
 	game->show_minimap = 1;
-	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_DISABLED); //MLX_MOUSE_NORMAL for normal cursor
 	mlx_get_mouse_pos(game->mlx, &mx, &my);
 	game->mouse_x = (int)mx;
 	return (0);

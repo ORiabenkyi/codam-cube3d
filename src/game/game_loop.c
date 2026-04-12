@@ -2,7 +2,7 @@
 
 /*
 ** Called by MLX42 once per frame.
-** Processes input first, then re-renders the scene.
+** Processes input first, then re-renders the scene and overlays.
 */
 void	game_loop(void *param)
 {
@@ -13,4 +13,5 @@ void	game_loop(void *param)
 	update_doors(game);
 	render_frame(game);
 	draw_minimap(game);
+	draw_player_info(game);
 }

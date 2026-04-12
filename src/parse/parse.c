@@ -1,124 +1,42 @@
 #include "cube3d.h"
 
 /*
-** Checks that path ends with ".cub".
-** Returns 0 on success, -1 on error.
+** Processes one line from all_lines at index i.
+** Returns: 1 = map section ended (break), 0 = continue, -1 = error.
 */
-static int	check_extension(char *path)
+static int	process_line(t_map *map, char **all_lines, int total,
+	char ***ml, int *mc, int *mcap, int *in_map, int i)
 {
-	int	len;
-
-	len = (int)ft_strlen(path);
-	if (len < 5 || ft_strncmp(path + len - 4, ".cub", 4) != 0)
-		return (ft_error(ERR_EXT));
-	return (0);
-}
-
-/*
-** Drains the GNL static buffer by reading until EOF/error.
-** Must be called while fd is still open so that read() fails with EBADF
-** after close — which causes GNL to free its internal buffer_string.
-*/
-static void	gnl_drain(int fd)
-{
-	char	*line;
-
-	line = get_next_line(fd);
-	while (line)
+	if (is_empty_line(all_lines[i]))
 	{
-		free(line);
-		line = get_next_line(fd);
-	}
-}
-
-/*
-** Reads every line from fd into a NULL-terminated char** array.
-** Strips trailing newline from each line.
-** Drains the GNL static buffer before returning NULL on failure so the
-** caller's close(fd) does not leave a stale buffer for future GNL calls.
-** Caller must free_array() the result.
-*/
-static char	**read_all_lines(int fd, int *count)
-{
-	char	**lines;
-	char	**tmp;
-	char	*line;
-	int		cap;
-	int		len;
-
-	*count = 0;
-	cap = 64;
-	lines = ft_calloc(cap, sizeof(char *));
-	if (!lines)
-		return (NULL);
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (*count >= cap - 2)
-		{
-			cap *= 2;
-			tmp = ft_calloc(cap, sizeof(char *));
-			if (!tmp)
-			{
-				free(line);
-				free_array(lines);
-				gnl_drain(fd);
-				return (NULL);
-			}
-			ft_memcpy(tmp, lines, sizeof(char *) * (*count));
-			free(lines);
-			lines = tmp;
-		}
-		len = (int)ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-		lines[(*count)++] = line;
-		line = get_next_line(fd);
-	}
-	return (lines);
-}
-
-/*
-** Adds a map line pointer to the map_lines buffer, growing it if needed.
-** map_lines elements are *not* owned — they point into all_lines.
-** Returns 0 on success, -1 on allocation failure.
-*/
-static int	append_map_line(char ***map_lines, int *map_count, int *map_cap,
-	char *line)
-{
-	char	**tmp;
-
-	if (*map_count >= *map_cap - 2)
-	{
-		*map_cap *= 2;
-		tmp = ft_calloc(*map_cap, sizeof(char *));
-		if (!tmp)
+		if (!*in_map)
+			return (0);
+		if (check_no_content_after(all_lines, total, i + 1) == -1)
 			return (-1);
-		ft_memcpy(tmp, *map_lines, sizeof(char *) * (*map_count));
-		free(*map_lines);
-		*map_lines = tmp;
+		return (1);
 	}
-	(*map_lines)[(*map_count)++] = line;
+	if (*in_map || is_map_line(all_lines[i]))
+	{
+		*in_map = 1;
+		if (append_map_line(ml, mc, mcap, all_lines[i]) == -1)
+			return (ft_error(ERR_MEM));
+		return (0);
+	}
+	if (parse_header_line(map, all_lines[i]) == -1)
+		return (-1);
 	return (0);
 }
 
 /*
-** Checks that no non-empty lines remain after the map ends.
-** Called when an empty line is encountered while in map mode.
-** Returns 0 if clean, -1 if stray content is found.
+** Frees temporary parse buffers and the map on failure.
+** Always returns -1 so callers can chain: return (parse_cleanup(...)).
 */
-static int	check_no_content_after(char **all_lines, int total, int from)
+static int	parse_cleanup(char **all, char **ml, t_map *map)
 {
-	int	j;
-
-	j = from;
-	while (j < total)
-	{
-		if (!is_empty_line(all_lines[j]))
-			return (ft_error(ERR_AFTER));
-		j++;
-	}
-	return (0);
+	free_array(all);
+	free(ml);
+	free_map(map);
+	return (-1);
 }
 
 /*
@@ -129,10 +47,7 @@ static int	collect_lines(t_map *map, char **all_lines, int total,
 	char ***map_lines_out)
 {
 	char	**map_lines;
-	int		map_count;
-	int		map_cap;
-	int		in_map;
-	int		i;
+	int		map_count, map_cap, in_map, i, ret;
 
 	in_map = 0;
 	map_count = 0;
@@ -143,36 +58,15 @@ static int	collect_lines(t_map *map, char **all_lines, int total,
 	i = 0;
 	while (i < total)
 	{
-		if (is_empty_line(all_lines[i]))
+		ret = process_line(map, all_lines, total,
+				&map_lines, &map_count, &map_cap, &in_map, i);
+		if (ret == -1)
 		{
-			if (in_map)
-			{
-				if (check_no_content_after(all_lines, total, i + 1) == -1)
-				{
-					free(map_lines);
-					return (-1);
-				}
-				break ;
-			}
+			free(map_lines);
+			return (-1);
 		}
-		else if (in_map || is_map_line(all_lines[i]))
-		{
-			in_map = 1;
-			if (append_map_line(&map_lines, &map_count, &map_cap,
-					all_lines[i]) == -1)
-			{
-				free(map_lines);
-				return (ft_error(ERR_MEM));
-			}
-		}
-		else
-		{
-			if (parse_header_line(map, all_lines[i]) == -1)
-			{
-				free(map_lines);
-				return (-1);
-			}
-		}
+		if (ret == 1)
+			break ;
 		i++;
 	}
 	*map_lines_out = map_lines;
@@ -180,19 +74,42 @@ static int	collect_lines(t_map *map, char **all_lines, int total,
 }
 
 /*
+** Runs collect, validates headers, builds grid and validates map.
+** Frees temporary buffers on failure; keeps map->grid on success.
+*/
+static int	do_parse(t_map *map, char **all_lines, int total)
+{
+	char	**map_lines;
+	int		map_count;
+
+	map_lines = NULL;
+	map_count = collect_lines(map, all_lines, total, &map_lines);
+	if (map_count == -1)
+		return (parse_cleanup(all_lines, map_lines, map));
+	if (headers_complete(map) == -1 || map_count == 0)
+	{
+		if (map_count == 0)
+			ft_error(ERR_MAP);
+		return (parse_cleanup(all_lines, map_lines, map));
+	}
+	if (build_map_grid(map, map_lines, map_count) == -1
+		|| validate_map(map) == -1)
+		return (parse_cleanup(all_lines, map_lines, map));
+	free_array(all_lines);
+	free(map_lines);
+	return (0);
+}
+
+/*
 ** Entry point for parsing a .cub file.
-** Validates extension, reads file, parses headers and map, validates all.
-** Populates game->map on success.
-** Returns 0 on success, -1 on any error (error message already printed).
+** Validates extension, reads file, then delegates to do_parse.
+** Returns 0 on success, -1 on any error.
 */
 int	parse_file(t_game *game, char *path)
 {
 	int		fd;
 	char	**all_lines;
-	char	**map_lines;
 	int		total;
-	int		map_count;
-	t_map	*map;
 
 	if (check_extension(path) == -1)
 		return (-1);
@@ -203,39 +120,6 @@ int	parse_file(t_game *game, char *path)
 	close(fd);
 	if (!all_lines)
 		return (ft_error(ERR_MEM));
-	map = &game->map;
-	ft_bzero(map, sizeof(t_map));
-	map_lines = NULL;
-	map_count = collect_lines(map, all_lines, total, &map_lines);
-	if (map_count == -1)
-	{
-		free_array(all_lines);
-		free_map(map);
-		return (-1);
-	}
-	if (headers_complete(map) == -1)
-	{
-		free_array(all_lines);
-		free(map_lines);
-		free_map(map);
-		return (-1);
-	}
-	if (map_count == 0)
-	{
-		free_array(all_lines);
-		free(map_lines);
-		free_map(map);
-		return (ft_error(ERR_MAP));
-	}
-	if (build_map_grid(map, map_lines, map_count) == -1
-		|| validate_map(map) == -1)
-	{
-		free_array(all_lines);
-		free(map_lines);
-		free_map(map);
-		return (-1);
-	}
-	free_array(all_lines);
-	free(map_lines);
-	return (0);
+	ft_bzero(&game->map, sizeof(t_map));
+	return (do_parse(&game->map, all_lines, total));
 }
